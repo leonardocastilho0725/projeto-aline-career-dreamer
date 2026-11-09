@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Conte seus hobbies e interesses e descubra carreiras em tecnologia que combinam com você.">
+  <title>Career Dreamer — Descubra sua carreira em tecnologia</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/config.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <header class="topo">
+    <div class="container topo__conteudo">
+      <a href="index.html" class="marca">
+        <span class="marca__simbolo" aria-hidden="true">cd</span>
+        <span>Career Dreamer</span>
+      </a>
+    </div>
+  </header>
+
+  <main class="container pagina-inicial">
+    <section class="apresentacao">
+      <h1 class="titulo-principal">Descubra carreiras em tecnologia que combinam com você</h1>
+      <p class="apresentacao__texto">
+        Conte o que você gosta de fazer no tempo livre e o que desperta sua curiosidade.
+        Em poucos segundos você recebe um mapa de carreiras com o que estudar primeiro.
+      </p>
+
+      <h2 class="subtitulo">Como funciona o Mapeamento Vocacional</h2>
+      <ol class="passos">
+        <li class="passo">Preencha seu nome, hobbies e interesses.</li>
+        <li class="passo">Nossa análise cruza suas respostas com perfis de carreira.</li>
+        <li class="passo">Você recebe as carreiras mais compatíveis e um roteiro de estudos.</li>
+      </ol>
+    </section>
+
+    <section class="cartao" aria-labelledby="titulo-perfil">
+      <h2 class="subtitulo-cartao" id="titulo-perfil">Seu perfil</h2>
+
+      <form id="form-perfil" class="formulario">
+        <div class="campo">
+          <label for="nome">Nome</label>
+          <input type="text" id="nome" name="nome" placeholder="Ex.: Leonardo Castilho"
+                 required minlength="2" maxlength="60" autocomplete="name">
+        </div>
+
+        <div class="campo">
+          <label for="hobbies">Hobbies</label>
+          <textarea id="hobbies" name="hobbies" rows="3" required
+                    aria-describedby="dica-hobbies"
+                    placeholder="Ex.: jogar videogame, desenhar, organizar eventos"></textarea>
+          <p class="dica" id="dica-hobbies">Separe cada hobby com vírgula.</p>
+        </div>
+
+        <div class="campo">
+          <label for="interesses">Áreas de interesse</label>
+          <textarea id="interesses" name="interesses" rows="3" required
+                    aria-describedby="dica-interesses"
+                    placeholder="Ex.: design de interfaces, desenvolvimento web"></textarea>
+          <p class="dica" id="dica-interesses">Separe cada interesse com vírgula.</p>
+        </div>
+
+        <button type="submit" class="botao">Descobrir minha carreira</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="container">
+      <p>Projeto acadêmico — Análise e Desenvolvimento de Sistemas.
+        <a href="resultado.html?exemplo">Ver um resultado de exemplo</a></p>
+    </div>
+  </footer>
+
+  <!-- Modal "Tente mais tarde" (issue #11). O JS abre com showModal(); Esc fecha sozinho. -->
+  <dialog id="modal-erro" class="modal" aria-labelledby="modal-titulo">
+    <h2 id="modal-titulo">Tente mais tarde</h2>
+    <p id="modal-mensagem">O serviço ainda não está disponível. Tente novamente mais tarde.</p>
+    <p class="modal__acoes">
+      <button type="button" id="modal-fechar" class="botao">Entendi</button>
+    </p>
+  </dialog>
+</body>
+</html>
