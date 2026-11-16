@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="NextStep: descubra carreiras em tecnologia a partir dos seus hobbies e interesses.">
+  <title>NextStep — Descubra sua carreira em tecnologia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/config.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <header class="topo">
+    <div class="container topo__conteudo">
+      <a href="index.html" class="marca">
+        <span class="marca__simbolo" aria-hidden="true">ns</span>
+        <span>NextStep</span>
+      </a>
+      <nav class="menu" aria-label="Principal">
+        <a href="#sobre">Sobre</a>
+        <a href="#carreiras">Áreas</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#comecar">Começar</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container pagina-inicial">
+    <section class="hero apresentacao">
+      <p class="etiqueta">Mapeamento vocacional</p>
+      <h1 class="titulo-principal">NextStep é um mapa de carreiras em <em>tecnologia</em> criado a partir do que você <em>gosta de fazer</em>.</h1>
+      <p class="apresentacao__texto">
+        Conte seus hobbies e interesses e receba as carreiras mais compatíveis com você,
+        com um roteiro de estudos para dar o primeiro passo.
+      </p>
+      <a href="#comecar" class="botao">Começar meu mapa</a>
+    </section>
+
+    <section id="sobre" class="sobre" aria-labelledby="titulo-sobre">
+      <p class="etiqueta">Sobre o projeto</p>
+      <h2 class="secao-titulo" id="titulo-sobre">O que é o NextStep</h2>
+      <p>
+        Muita gente sabe do que gosta, mas não sabe que profissão nasce disso. O NextStep ajuda a fazer essa ligação:
+        a pessoa informa seus hobbies e interesses, uma API com inteligência artificial analisa o perfil e devolve
+        as carreiras em tecnologia mais compatíveis, com a porcentagem de compatibilidade, as competências-chave e um
+        roteiro de estudos em ordem.
+      </p>
+      <p>
+        Este é um projeto acadêmico de Front-End do curso de Análise e Desenvolvimento de Sistemas. A equipe analisou o
+        código entregue pela professora, corrigiu 13 problemas de validação, responsividade e acessibilidade e conectou o
+        formulário à API.
+      </p>
+      <ul class="chips" aria-label="Tecnologias utilizadas">
+        <li>HTML5</li><li>CSS3</li><li>JavaScript</li><li>Fetch API</li><li>Acessibilidade</li><li>Responsivo</li>
+      </ul>
+    </section>
+
+    <section id="carreiras" aria-labelledby="titulo-areas">
+      <p class="etiqueta">Áreas</p>
+      <h2 class="secao-titulo" id="titulo-areas">Onde seus interesses podem levar</h2>
+      <ul class="areas">
+        <li><span class="numero" aria-hidden="true">01</span><span class="legenda">Desenvolvimento web</span></li>
+        <li><span class="numero" aria-hidden="true">02</span><span class="legenda">Games e sistemas interativos</span></li>
+        <li><span class="numero" aria-hidden="true">03</span><span class="legenda">Dados e inteligência artificial</span></li>
+        <li><span class="numero" aria-hidden="true">04</span><span class="legenda">UX/UI e acessibilidade</span></li>
+        <li><span class="numero" aria-hidden="true">05</span><span class="legenda">Produto e gestão</span></li>
+        <li><span class="numero" aria-hidden="true">06</span><span class="legenda">Segurança e infraestrutura</span></li>
+      </ul>
+    </section>
+
+    <section id="como-funciona" aria-labelledby="titulo-passos">
+      <p class="etiqueta">Como funciona</p>
+      <h2 class="secao-titulo" id="titulo-passos">Três passos até o seu próximo passo</h2>
+      <ol class="passos">
+        <li class="passo">Preencha seu nome, hobbies e interesses.</li>
+        <li class="passo">Nossa análise cruza suas respostas com perfis de carreira.</li>
+        <li class="passo">Você recebe as carreiras mais compatíveis e um roteiro de estudos.</li>
+      </ol>
+    </section>
+
+    <section id="comecar" class="cartao formulario-secao" aria-labelledby="titulo-perfil">
+      <p class="etiqueta">Seu perfil</p>
+      <h2 class="secao-titulo" id="titulo-perfil">Vamos começar.</h2>
+
+      <form id="form-perfil" class="formulario">
+        <div class="campo">
+          <label for="nome">Nome</label>
+          <input type="text" id="nome" name="nome" placeholder="Ex.: Leonardo Castilho"
+                 required minlength="2" maxlength="60" autocomplete="name">
+        </div>
+
+        <div class="campo">
+          <label for="hobbies">Hobbies</label>
+          <textarea id="hobbies" name="hobbies" rows="3" required
+                    aria-describedby="dica-hobbies"
+                    placeholder="Ex.: jogar videogame, desenhar, organizar eventos"></textarea>
+          <p class="dica" id="dica-hobbies">Separe cada hobby com vírgula.</p>
+        </div>
+
+        <div class="campo">
+          <label for="interesses">Áreas de interesse</label>
+          <textarea id="interesses" name="interesses" rows="3" required
+                    aria-describedby="dica-interesses"
+                    placeholder="Ex.: design de interfaces, desenvolvimento web"></textarea>
+          <p class="dica" id="dica-interesses">Separe cada interesse com vírgula.</p>
+        </div>
+
+        <button type="submit" class="botao">Descobrir minha carreira</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="container">
+      <nav class="menu" aria-label="Rodapé">
+        <a href="index.html">Início</a>
+        <a href="#carreiras">Áreas</a>
+        <a href="#comecar">Começar</a>
+        <a href="resultado.html?exemplo">Resultado de exemplo</a>
+      </nav>
+      <p>Projeto acadêmico — Análise e Desenvolvimento de Sistemas<br>
+        Leonardo Castilho · Alessandro Manoel · Jonathan Buono · © 2026 NextStep</p>
+    </div>
+  </footer>
+
+  <dialog id="modal-erro" class="modal" aria-labelledby="modal-titulo">
+    <h2 id="modal-titulo">Tente mais tarde</h2>
+    <p id="modal-mensagem">O serviço ainda não está disponível. Tente novamente mais tarde.</p>
+    <p class="modal__acoes">
+      <button type="button" id="modal-fechar" class="botao">Entendi</button>
+    </p>
+  </dialog>
+</body>
+</html>
