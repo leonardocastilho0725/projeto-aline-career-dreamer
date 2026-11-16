@@ -1,123 +1,92 @@
-# Career Dreamer — Mapeamento Vocacional
+# NextStep — Mapeamento Vocacional
 
-Página web em que estudantes informam nome, hobbies e interesses. Os dados são
-enviados para uma API com IA, que devolve um perfil profissional em JSON, exibido
-na página de resultado.
+Página web que ajuda estudantes a descobrir **carreiras em tecnologia** a partir dos seus hobbies e interesses.
+A pessoa preenche um formulário, os dados são enviados a uma API com inteligência artificial e a página de
+resultado mostra as carreiras mais compatíveis, com porcentagem de compatibilidade, competências-chave e um roteiro de estudos.
 
-Tecnologias: **HTML5, CSS3 e JavaScript (ES6) puro**, sem frameworks.
+**Site:** https://leonardocastilho0725.github.io/projeto-aline-career-dreamer/
 
-## Sua missão
+> Projeto acadêmico de Front-End — Análise e Desenvolvimento de Sistemas.
+> Baseado no projeto [LiniiS/career-dreamer](https://github.com/LiniiS/career-dreamer), que continha defeitos propositais a serem encontrados e corrigidos.
 
-O cliente encontrou vários problemas. Eles estão descritos em **`ISSUES.md`**.
-Resolva cada issue e registre o que fez (um commit por issue é uma ótima prática):
+## Equipe
+- Leonardo Castilho
+- Alessandro Manoel
+- Jonathan Buono
 
-```
-git commit -m "fix #02: campo nome aceita texto e tem validação"
-```
+## Funcionalidades
+- Formulário com validação nativa do HTML5 e validação em JavaScript (nome de 2 a 60 caracteres, itens vazios descartados, espaços removidos, aviso no próprio campo).
+- Envio à API com `fetch` e `async/await`, com limite de tempo, indicador de carregamento e bloqueio de clique duplo.
+- Modal "Tente mais tarde" para quando a API não está configurada, falha ou demora demais (fecha com o botão "Entendi" ou com Esc). Os dados digitados são mantidos.
+- Página de resultado montada dinamicamente: carreiras da mais para a menos compatível, barra de compatibilidade, competências-chave, roteiro de estudos e destaque "Melhor combinação".
+- Resumo rápido com a melhor combinação, botão **Salvar como PDF** (com estilo de impressão) e botão **Refazer mapeamento**.
+- Mensagem amigável quando a página de resultado é aberta sem dados.
 
-## Como rodar
-
-Não precisa instalar nada.
-
-- **Opção 1:** abra o arquivo `index.html` no navegador (duplo clique).
-- **Opção 2 (recomendada):** no VS Code, instale a extensão **Live Server**,
-  clique com o botão direito em `index.html` → *Open with Live Server*.
-  A página recarrega sozinha a cada vez que você salva.
-
-Para testar a página de resultado **sem o backend**, abra `resultado.html?exemplo`
-(ou clique em "Ver um resultado de exemplo" no rodapé).
+## Tecnologias
+HTML5, CSS3 e JavaScript (ES6) puro, sem frameworks. Ferramentas: Visual Studio Code com Live Server, Git/GitHub e as ferramentas do navegador (Console, modo dispositivo e Lighthouse).
 
 ## Estrutura
+```
+index.html          página inicial com o formulário
+resultado.html      página de resultado
+css/style.css       estilos (tema azul escuro e dourado)
+js/config.js        configuração (URL da API, tempo limite)
+js/app.js           validação e envio do formulário
+js/resultado.js     leitura dos dados e exibição do resultado
+js/dados-exemplo.js dados de teste (resultado.html?exemplo)
+```
 
-```
-versao-alunos/
-├── index.html          → formulário
-├── resultado.html      → página de resultado
-├── css/
-│   └── style.css       → todos os estilos
-├── js/
-│   ├── config.js       → endereço da API (cada grupo preenche o seu)
-│   ├── app.js          → lógica do formulário
-│   ├── resultado.js    → lógica da página de resultado
-│   └── dados-exemplo.js→ resposta de exemplo para testes
-├── ISSUES.md           → reclamações do cliente
-└── README.md
-```
+## Como executar
+1. Baixe ou clone o repositório.
+2. Abra a pasta no VS Code, clique com o botão direito em `index.html` e escolha **Open with Live Server**.
+3. Para ver o resultado sem usar a API, acesse `resultado.html?exemplo`.
 
 ## Configurando a API
-
-Abra `js/config.js` e preencha o endereço **completo** do endpoint:
+O endereço da API fica em um único lugar, `js/config.js`:
 
 ```js
 const CONFIG = Object.freeze({
-  API_URL: 'http://127.0.0.1:8000/api/career-match',
-  // ...
+  API_URL: 'https://google-career-dreamer-api.onrender.com/api/career-match',
+  TEMPO_LIMITE_MS: 60000,
+  CHAVE_RESULTADO: 'careerDreamer:resultado',
 });
 ```
 
-Enquanto `API_URL` estiver vazio (`''`), o site deve mostrar o modal "Tente mais tarde".
+- Enquanto `API_URL` estiver vazia, o site mostra o modal "Tente mais tarde".
+- A API fica em servidor gratuito: **a primeira resposta pode levar cerca de 1 minuto** para o servidor "acordar".
 
-## Contrato da API
-
-**Requisição** — `POST` para `CONFIG.API_URL`, cabeçalho `Content-Type: application/json`:
+**Contrato da API** — `POST` em JSON, com `Content-Type: application/json`:
 
 ```json
 {
   "name": "Ana Maria Clara",
-  "hobbies": ["dançar", "cantar", "organizar maratonas de programação"],
-  "interests": ["design de jogos", "desenvolvimento de pessoas", "planejar documentos"]
+  "hobbies": ["dançar", "cantar"],
+  "interests": ["design de jogos", "desenvolvimento de pessoas"]
 }
 ```
 
-**Resposta de sucesso** — status `200`:
+A resposta traz `user_name`, `career_identity_statement` e `recommended_careers` (cada carreira com `id`, `title`, `match_score`, `summary`, `key_skills` e `learning_path`).
 
-```json
-{
-  "user_name": "Ana Maria Clara",
-  "career_identity_statement": "Texto curto que resume o perfil da pessoa.",
-  "recommended_careers": [
-    {
-      "id": "ux-ui-designer",
-      "title": "Designer de UX/UI",
-      "match_score": 92,
-      "summary": "O que essa profissão faz, em uma ou duas frases.",
-      "key_skills": ["Figma", "Pesquisa com usuários"],
-      "learning_path": ["Passo 1", "Passo 2", "Passo 3"]
-    }
-  ]
-}
-```
+## Correções realizadas
+Foram corrigidos 13 problemas apontados pelo cliente:
 
-| Campo | Tipo | Descrição |
-|---|---|---|
-| `user_name` | texto | Nome da pessoa |
-| `career_identity_statement` | texto | Síntese do perfil |
-| `recommended_careers` | lista | Carreiras recomendadas |
-| `match_score` | número 0–100 | Compatibilidade em % |
-| `key_skills` | lista de textos | Competências-chave |
-| `learning_path` | lista de textos | Roteiro de estudos, em ordem |
+| # | Problema | Correção |
+|---|----------|----------|
+| 01 | Botão não enviava o formulário | `type="submit"` |
+| 02 | Campo Nome só aceitava números | `type="text"` com `required`, `minlength` e `maxlength` |
+| 03 | Formulário com campos lado a lado | `flex-direction: column` e botão com largura total |
+| 04 | Página ruim no celular | meta `viewport` e largura fluida no `.container` |
+| 05 | Navegador oferecia tradução | `lang="pt-BR"` |
+| 06 | Erros de português | textos revisados |
+| 07 | Rótulos com baixo contraste | cores seguindo a WCAG AA |
+| 08 | Rótulos sem `for` e foco invisível | `for`/`id` e `:focus-visible` |
+| 09 | Página sem estrutura semântica | `header`, `main`, `section`, `footer`, `h1`, `ol` |
+| 10 | Formulário aceitava dados vazios | `trim`, `filter` e avisos no campo |
+| 11 | `alert()` do navegador | modal com `<dialog>` |
+| 12 | Sem integração com a API | `fetch` com tempo limite e tratamento de erros |
+| 13 | Página de resultado em branco | renderização com `<template>` |
 
-Qualquer status diferente de `2xx` deve ser tratado como erro.
-A quantidade de carreiras pode variar (o exemplo real tem 4). Uma resposta completa está em `js/dados-exemplo.js`.
+## Acessibilidade e responsividade
+Idioma `pt-BR`, HTML semântico, rótulos ligados aos campos, contraste seguindo a WCAG AA, foco visível na navegação por teclado, modal que fecha com Esc e layout adaptado a telas a partir de 360 px. 
 
-> **Atenção:** se o backend estiver hospedado em plano gratuito (ex.: Render), a primeira
-> requisição depois de um tempo parado pode levar cerca de 1 minuto. Isso não é bug do front.
-
-## Boas práticas que esperamos ver
-
-- **KISS** (*Keep It Simple*): a solução mais simples que resolve o problema.
-- **YAGNI** (*You Aren't Gonna Need It*): não crie o que ninguém pediu.
-- HTML **semântico** (`header`, `main`, `section`, `footer`, `h1`, `ol`, `label for`…).
-- Validação com recursos **nativos do HTML5** sempre que possível.
-- `const`/`let`, *arrow functions*, `async/await`, *template strings*.
-- `textContent` em vez de `innerHTML` para textos que vêm da API.
-- Nomes de variáveis e funções **em português e descritivos**.
-
-## Ferramentas úteis
-
-- **F12 → Console:** erros de JavaScript e `console.log`.
-- **F12 → modo dispositivo (Ctrl+Shift+M):** simula celular.
-- **F12 → Lighthouse:** auditoria de acessibilidade.
-- [W3C Validator](https://validator.w3.org/) — valida o HTML.
-- [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/) — contraste de cores.
-- [MDN Web Docs](https://developer.mozilla.org/pt-BR/) — documentação em português.
+desenvolvedor - Leonardo Castilho
